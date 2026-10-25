@@ -18,13 +18,20 @@
 
 ## 📌 Overview
 
-ICMP / TCP / UDP crafting, traceroute,
+
+OSurge is an advanced packet crafter for ICMP, TCP and UDP that supports traceroute, latency measurement and firewall-rule validation. It uses Scapy when available and falls back to raw sockets, and ships in a safe dry-run mode by default: packets are built and summarised but not transmitted unless you explicitly authorize live sending. It is intended for authorized network testing only.
 
 ---
 
 ## ✨ Features
 
-- Packet crafter and flood lab with traceroute; safe dry-run by default, live TX needs authorization
+
+- Craft ICMP, TCP and UDP packets with control over port, count, size, TTL, flags and interval
+- Traceroute, latency measurement and firewall-rule validation workflows
+- Scapy-preferred engine with a raw-socket fallback when Scapy is absent
+- SAFE dry-run mode by default; live transmission requires --i-am-authorized plus typed confirmation
+- Configurable source address and timeout, with optional flood mode
+- Colour toggle for piped output and an interactive menu
 
 ---
 
@@ -37,8 +44,12 @@ ICMP / TCP / UDP crafting, traceroute,
 
 ## 🚀 Usage
 
+
 ```bash
-./OSurge
+./OSurge --target 10.0.0.5 --mode icmp --count 4
+./OSurge --target 10.0.0.5 --mode tcp --port 443 --flags S
+./OSurge --target 10.0.0.5 --mode udp --port 53 --size 128 --ttl 32
+./OSurge --help
 ```
 
 ---
